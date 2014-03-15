@@ -8,13 +8,6 @@ var vertexPositionAttribute;
 var vertexColorAttribute;
 var perspectiveMatrix;
 
-//
-// start
-//
-// Called when the canvas is created to get the ball rolling.
-// Figuratively, that is. There's nothing moving in this demo.
-//
-
  var gradients = [
     focusColors,
     todayColors,
@@ -57,10 +50,8 @@ function start() {
 
   initWebGL(canvas);      // Initialize the GL context
   
-  // Only continue if WebGL is available and working
-  
   if (gl) {
-    gl.clearColor(1.0, 1.0, 1.0, 1.0);  // Clear to black, fully opaque
+    gl.clearColor(1.0, 1.0, 1.0,0.0);  // Clear to black, fully opaque
     gl.clearDepth(1.0);                 // Clear everything
     gl.enable(gl.DEPTH_TEST);           // Enable depth testing
     gl.depthFunc(gl.LEQUAL);            // Near things obscure far things
@@ -79,22 +70,9 @@ function start() {
 
 function _setDirection() {
   window.directions = [];
-  window.directions[0] = window.startColor[0] > window.endColor[0] ? -0.01 : 0.01;
-  window.directions[1] = window.startColor[1] > window.endColor[1] ? -0.01 : 0.01;
-  window.directions[2] = window.startColor[2] > window.endColor[2] ? -0.01 : 0.01;
-  window.directions[3] = window.startColor[3] > window.endColor[3] ? -0.01 : 0.01;
-  window.directions[4] = window.startColor[4] > window.endColor[4] ? -0.01 : 0.01;
-  window.directions[5] = window.startColor[5] > window.endColor[5] ? -0.01 : 0.01;
-  window.directions[6] = window.startColor[6] > window.endColor[6] ? -0.01 : 0.01;
-  window.directions[7] = window.startColor[7] > window.endColor[7] ? -0.01 : 0.01;
-  window.directions[8] = window.startColor[8] > window.endColor[8] ? -0.01 : 0.01;
-  window.directions[9] = window.startColor[9] > window.endColor[9] ? -0.01 : 0.01;
-  window.directions[10] = window.startColor[10] > window.endColor[10] ? -0.01 : 0.01;
-  window.directions[11] = window.startColor[11] > window.endColor[11] ? -0.01 : 0.01;
-  window.directions[12] = window.startColor[12] > window.endColor[12] ? -0.01 : 0.01;
-  window.directions[13] = window.startColor[13] > window.endColor[13] ? -0.01 : 0.01;
-  window.directions[14] = window.startColor[14] > window.endColor[14] ? -0.01 : 0.01;
-  window.directions[15] = window.startColor[15] > window.endColor[15] ? -0.01 : 0.01;
+  for(var i = 0; i < window.startColor.length; i++){
+    window.directions[i] =  window.startColor[i] > window.endColor[i] ? -0.01 : 0.01;
+  };
 };
 
 function initWebGL() {
