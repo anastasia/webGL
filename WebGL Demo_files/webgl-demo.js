@@ -57,12 +57,12 @@ function start() {
     gl.depthFunc(gl.LEQUAL);            // Near things obscure far things
  
     initShaders();
-    window.startColor = focusColors;
+    window.startColor = laterColors;
     window.currColor = window.startColor;
-    window.endColor = laterColors;
+    window.endColor = todayColors;
     _setDirection();
      
-    setInterval(initBuffers, 50);
+    setInterval(initBuffers, 30);
     setInterval(drawScene, 15);
   }
 };
@@ -99,15 +99,25 @@ function initBuffers() {
   
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 
+/*
+  window.currColor.length / 2
+  for(var i = currColor.length/2; i < window.currColor.length; i++) {
 
-  for(var i = 0; i < window.currColor.length; i++) {
+*/
+  for(var j = window.currColor.length/2; j < window.currColor.length; j++) {
+    if (window.directions[j] > 0 && window.currColor[j] <= window.endColor[j]) {
+      window.currColor[j] += window.directions[j];         
+    } else if (window.directions[j] < 0 && window.currColor[j] >= window.endColor[j]) {
+      window.currColor[j] += window.directions[j];
+    }
+  }
+  for(var i = 0; i < window.currColor.length/2; i++) {
     if (window.directions[i] > 0 && window.currColor[i] <= window.endColor[i]) {
       window.currColor[i] += window.directions[i];         
     } else if (window.directions[i] < 0 && window.currColor[i] >= window.endColor[i]) {
       window.currColor[i] += window.directions[i];
     }
   }
-
 
   squareVerticesColorBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, squareVerticesColorBuffer);
